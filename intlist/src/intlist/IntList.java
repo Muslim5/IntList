@@ -1,6 +1,5 @@
 package intlist;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -30,7 +29,7 @@ public class IntList {
 	 * 
 	 */
 	
-	public IntList(int[] array) {
+	public IntList() {
 		list = new int[0];
 	}
 
@@ -52,6 +51,11 @@ public class IntList {
 		return list.length;
 	}
 	
+	/**
+	 * @inspects | this
+	 * @pre | 0 <= index && index <= getLength()
+	 * @post | result == getIntList()[index]
+	 */
 	public int getElement(int index) {
 		return list[index];
 	}
@@ -70,25 +74,21 @@ public class IntList {
 	 * 
 	 */
 	public void addElement(int element) {
-		int[] aux = new int[list.length + 1];
-		for(int i = 0; i < list.length; i++) {
-			aux[i] = list[i];
-		}
-		aux[list.length] = element;
+		list = Arrays.copyOf(list, list.length+1);
+		list[list.length - 1] = element;
 	}
 	
 	/**
 	 * @mutates | this
+	 * 
+	 * @pre | getLength() > 0
 	 * 
 	 * @post | getIntList().length == old(getIntList()).length - 1
 	 * @post | Arrays.equals(getIntList(), 0, old(getIntList()).length - 1, old(getIntList()), 0, old(getIntList()).length - 1)
 	 */
 	
 	public void removeElement() {
-		int [] aux = new int[list.length - 1];
-		for(int i = 0; i < list.length - 1; i++) {
-			aux[i] = list[i];
-		}
+		list = Arrays.copyOf(list, list.length - 1);
 		
 	}
 	
